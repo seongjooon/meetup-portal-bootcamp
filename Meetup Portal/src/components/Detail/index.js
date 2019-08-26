@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadCityData } from '../../reducers/cityDataReducer';
+import { loadCityData } from '../../redux/city/ducks';
 
 class Detail extends Component {
   componentDidMount() {
-    loadCityData();
+    this.props.loadCityData();
   }
 
   render() {
