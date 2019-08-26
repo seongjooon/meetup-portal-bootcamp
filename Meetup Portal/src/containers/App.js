@@ -1,12 +1,21 @@
 import { connect } from 'react-redux';
 import App from '../components/App';
+import { getMeetupApi } from '../api/api';
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    cityData: state.cityDataReducer
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    onLoad() {
+      getMeetupApi().then(data => {
+        dispatch({ type: 'INITIAILIZE_PAGE', data });
+      });
+    }
+  };
 };
 
 export default connect(

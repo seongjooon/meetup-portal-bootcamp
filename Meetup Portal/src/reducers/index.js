@@ -1,13 +1,6 @@
 import { combineReducers } from 'redux';
-import { setUpReducer } from './setUpReducer';
+import { cityDataReducer } from './cityDataReducer';
 
-export const initState = {
-  setUp: []
-};
-
-const reducers = values =>
-  combineReducers({
-    setUp: setUpReducer
-  });
-
-export default reducers;
+export default combineReducers({
+  cityDataReducer
+});
