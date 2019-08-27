@@ -1,4 +1,17 @@
-.map-box {
-  width:900px;
-  height:700px;
+.info-box {
+  width: 500px;
+  text-align: center;
+}
+
+.info-event-name {
+  width: 100%;
+  padding: 3px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.info-event-host-img {
+  float: left;
+  width: 100px;
+  height: 120px;
 }

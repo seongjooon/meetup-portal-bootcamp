@@ -1,0 +1,11 @@
+body {
+  background-color: gray;
+}
+
+.App {
+  width: 100%;
+}
+
+.detail-box {
+  max-width: 200px;
+}

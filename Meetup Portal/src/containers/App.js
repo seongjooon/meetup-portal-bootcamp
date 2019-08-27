@@ -3,9 +3,7 @@ import App from '../components/App';
 import { getMeetupApi } from '../api/api';
 
 const mapStateToProps = state => {
-  return {
-    eventList: state.eventList
-  };
+  return { eventList: state.eventList };
 };
 
 const mapDispatchToProps = dispatch => {

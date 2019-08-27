@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MapContainer from './Map';
 import Detail from './Detail';
+import Bookmark from './Bookmark';
 
 class App extends Component {
   componentDidMount() {
@@ -9,13 +10,15 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { eventList } = this.props;
     return (
       <div className='App'>
         <MapContainer eventList={eventList} />
-        <Detail />
-        {/* <Bookmark /> */}
+        <div className='detail-box'>
+          <div className='logo'>Meetup</div>
+          <Detail eventList={eventList} />
+          <Bookmark />
+        </div>
       </div>
     );
   }

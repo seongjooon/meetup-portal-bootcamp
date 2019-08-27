@@ -1,37 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import './index.css';
 
 class Detail extends Component {
   render() {
-    // const { eventList } = this.props;
+    const { eventList } = this.props;
     return (
-      <>
-        {/* {eventData.length ? (
-          <div className='events-box'>
-            <div>
-              {eventData.map(eventEL => (
-                <div className='event-element' key={eventEL.id}>
-                  <div className='event-created-at'>
-                    {`${eventEL.local_date}/${eventEL.local_time}`}
-                  </div>
-                  <div className='event-name'>{eventEL.name}</div>
+      <Fragment>
+        {eventList.length ? (
+          <div className='event-list-box'>
+            <div className='event-list-title'>Event List</div>
+            <div className='events-box'>
+              {eventList.map(event => (
+                <div className='event-element' key={event.id}>
+                  <div className='event-name'>{event.name}</div>
                   <div className='event-group-name'>
-                    Group name - {eventEL.group.name}
+                    Group name - {event.group.name}
                   </div>
                   <div className='rsvp-num'>
-                    RSVP 인원 - {eventEL.yes_rsvp_count}
+                    RSVP 인원 - {event.yes_rsvp_count}
                   </div>
-                  <div className='host-name'>
-                    Host - {eventEL.group.urlname}
+                  <div className='event-created-at'>
+                    {`${event.local_date}/${event.local_time}`}
                   </div>
-                  <div className='host-img'>{null}</div>
                 </div>
               ))}
             </div>
           </div>
-        ) : null} */}
-      </>
+        ) : null}
+      </Fragment>
     );
   }
 }

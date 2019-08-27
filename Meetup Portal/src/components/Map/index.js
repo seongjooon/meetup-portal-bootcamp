@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, GoogleApiWrapper, Marker } from 'google-maps-react';
 import './index.css';
+import { getHostDataApi } from '../../api/api';
 
 const mapStyles = {
   width: '100%',
@@ -11,17 +12,23 @@ class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
-    selectedPlace: {}
+    selectedPlace: {},
+    hostName: null,
+    hostImg: null
   };
 
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = async (props, marker, e) => {
+    const hostData = await getHostDataApi(props.eventUrlName, props.eventId);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true
+      showingInfoWindow: true,
+      hostName: hostData['0'].name,
+      hostImg: hostData['0'].photo.thumb_link
     });
+  };
 
-  onMapClicked = props => {
+  _onMapClicked = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -30,6 +37,10 @@ class MapContainer extends Component {
     }
   };
 
+  _handleDrag = () => {
+
+  }
+
   displayMarkers = () => {
     const { eventList } = this.props;
     return eventList.map(event => {
@@ -37,12 +48,18 @@ class MapContainer extends Component {
         return (
           <Marker
             key={event.id}
-            id={event.id}
+            eventId={event.id}
             onClick={this.onMarkerClick}
             position={{
               lat: event.venue.lat,
               lng: event.venue.lon
             }}
+            eventName={event.name}
+            eventDate={event.local_date}
+            eventTime={event.local_time}
+            eventGroupName={event.group.name}
+            eventRsvp={event.yes_rsvp_count}
+            eventUrlName={event.group.urlname}
           />
         );
       }
@@ -50,21 +67,36 @@ class MapContainer extends Component {
   };
 
   render() {
+    const { google } = this.props;
+    const {
+      activeMarker,
+      showingInfoWindow,
+      selectedPlace,
+      hostName,
+      hostImg
+    } = this.state;
     return (
       <Map
-        google={this.props.google}
-        onClick={this.onMapClicked}
+        google={google}
+        onClick={this._onMapClicked}
+        onDragend={this._handleDrag}
         zoom={13}
         style={mapStyles}
         initialCenter={{ lat: 40.712586, lng: -74.006839 }}
       >
         {this.displayMarkers()}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-        >
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
+        <InfoWindow marker={activeMarker} visible={showingInfoWindow}>
+          <div className='info-box'>
+            <img className='info-event-host-img' alt={hostName} src={hostImg} />
+            <div className='info-event-name'>{selectedPlace.eventName}</div>
+            <div className='info-event-date'>
+              {`${selectedPlace.eventDate} / ${selectedPlace.eventTime}`}
+            </div>
+            <div className='info-event-group-name'>
+              {selectedPlace.eventGroupName}
+            </div>
+            <div className='info-event-rsvp'>{selectedPlace.eventRsvp}</div>
+            <div className='info-event-host-name'>{hostName}</div>
           </div>
         </InfoWindow>
       </Map>
