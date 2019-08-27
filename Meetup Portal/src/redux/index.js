@@ -1,12 +1,33 @@
 import { combineReducers } from 'redux';
-import { all } from 'redux-saga/effects';
-import eventData from './event/ducks';
-import eventSaga from './event/sagas';
 
-export const rootReducer = combineReducers({
-  eventData
+const initialState = {
+  eventList: []
+};
+
+const eventListReducer = (state = initialState.eventList, action) => {
+  switch (action.type) {
+    case 'LOAD_EVENT':
+      return action.data;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  eventList: eventListReducer
 });
 
-export function* rootSaga() {
-  yield all([eventSaga()]);
-}
+
+
+
+// import { all } from 'redux-saga/effects';
+// import eventData from './event/ducks';
+// import eventSaga from './event/sagas';
+
+// export const rootReducer = combineReducers({
+//   eventData
+// });
+
+// export function* rootSaga() {
+//   yield all([eventSaga()]);
+// }

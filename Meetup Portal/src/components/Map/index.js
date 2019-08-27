@@ -1,43 +1,77 @@
 import React, { Component } from 'react';
+import { Map, InfoWindow, GoogleApiWrapper, Marker } from 'google-maps-react';
 import './index.css';
 
-class Map extends Component {
-  constructor(props) {
-    super(props)
-    this.mapBox = React.createRef();
-  }
+const mapStyles = {
+  width: '100%',
+  height: '100%'
+};
 
-  componentDidMount() {
-    this._initMap();
-  }
-
-  _initMap = () => {
-    const container = this.mapBox.current;
-    const options = {
-      center: new window.kakao.maps.LatLng(37.506024, 127.059162),
-      level: 3
-    };
-
-    new window.kakao.maps.Map(container, options);
+class MapContainer extends Component {
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {}
   };
 
-  // _zoomIn() {
-  //   var level = map.getLevel();
-  //   map.setLevel(level - 1);
-  // }
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
 
-  // _zoomOut() {
-  //   var level = map.getLevel();
-  //   map.setLevel(level + 1);
-  // }
+  onMapClicked = props => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
+  };
+
+  displayMarkers = () => {
+    const { eventList } = this.props;
+    return eventList.map(event => {
+      if (event.venue) {
+        return (
+          <Marker
+            key={event.id}
+            id={event.id}
+            onClick={this.onMarkerClick}
+            position={{
+              lat: event.venue.lat,
+              lng: event.venue.lon
+            }}
+          />
+        );
+      }
+    });
+  };
 
   render() {
     return (
-      <section>
-        <div className='map-box' ref={this.mapBox}></div>
-      </section>
+      <Map
+        google={this.props.google}
+        onClick={this.onMapClicked}
+        zoom={13}
+        style={mapStyles}
+        initialCenter={{ lat: 40.712586, lng: -74.006839 }}
+      >
+        {this.displayMarkers()}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+        >
+          <div>
+            <h1>{this.state.selectedPlace.name}</h1>
+          </div>
+        </InfoWindow>
+      </Map>
     );
   }
 }
 
-export default Map;
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyDLeObyHvEoHBoEUv6PqLOoXXJdkHKR7rk'
+})(MapContainer);

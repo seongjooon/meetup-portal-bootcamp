@@ -4,7 +4,7 @@ import { getMeetupApi } from '../api/api';
 
 const mapStateToProps = state => {
   return {
-    event: state.eventDataReducer
+    eventList: state.eventList
   };
 };
 
@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onLoad() {
       getMeetupApi().then(data => {
-        dispatch({ type: 'INITIAILIZE_PAGE', data });
+        dispatch({ type: 'LOAD_EVENT', data });
       });
     }
   };
