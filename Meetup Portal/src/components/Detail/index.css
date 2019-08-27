@@ -39,3 +39,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.bookmark-check-icon {
+  display: inline-block;
+  color: blue;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, GoogleApiWrapper, Marker } from 'google-maps-react';
-import './index.css';
 import { getHostDataApi } from '../../api/api';
+import './index.css';
 
 const mapStyles = {
   width: '100%',
@@ -17,7 +17,7 @@ class MapContainer extends Component {
     hostImg: null
   };
 
-  onMarkerClick = async (props, marker, e) => {
+  onMarkerClick = async (props, marker) => {
     const hostData = await getHostDataApi(props.eventUrlName, props.eventId);
     this.setState({
       selectedPlace: props,
@@ -28,7 +28,7 @@ class MapContainer extends Component {
     });
   };
 
-  _onMapClicked = props => {
+  _onMapClicked = () => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -37,9 +37,11 @@ class MapContainer extends Component {
     }
   };
 
-  _handleDrag = () => {
-
-  }
+  _handleDrag = (_, map) => {
+    const newLat = map.center.lat();
+    const newLng = map.center.lng();
+    this.props.onLoad(newLat, newLng);
+  };
 
   displayMarkers = () => {
     const { eventList } = this.props;
@@ -62,12 +64,13 @@ class MapContainer extends Component {
             eventUrlName={event.group.urlname}
           />
         );
+      } else {
+        return null;
       }
     });
   };
 
   render() {
-    const { google } = this.props;
     const {
       activeMarker,
       showingInfoWindow,
@@ -77,7 +80,7 @@ class MapContainer extends Component {
     } = this.state;
     return (
       <Map
-        google={google}
+        google={this.props.google}
         onClick={this._onMapClicked}
         onDragend={this._handleDrag}
         zoom={13}

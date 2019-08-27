@@ -3,6 +3,7 @@ import './App.css';
 import MapContainer from './Map';
 import Detail from './Detail';
 import Bookmark from './Bookmark';
+import { MEET_UP_LOGO } from '../constant/constants';
 
 class App extends Component {
   componentDidMount() {
@@ -10,15 +11,15 @@ class App extends Component {
   }
 
   render() {
-    const { eventList } = this.props;
+    const { eventList, onLoad, updateBookmark } = this.props;
     return (
       <div className='App'>
-        <MapContainer eventList={eventList} />
-        <div className='detail-box'>
-          <div className='logo'>Meetup</div>
-          <Detail eventList={eventList} />
-          <Bookmark />
+        <div className='logo'>
+          <img alt={0} src={MEET_UP_LOGO} />
         </div>
+        <MapContainer eventList={eventList} onLoad={onLoad} />
+        <Detail eventList={eventList} updateBookmark={updateBookmark} />
+        <Bookmark />
       </div>
     );
   }

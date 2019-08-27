@@ -3,9 +3,18 @@ body {
 }
 
 .App {
-  width: 100%;
+  width: 85%;
+  text-align: center;
 }
 
-.detail-box {
-  max-width: 200px;
+.logo {
+  display: inline-block;
+  position: fixed;
+  width: 300px;
+  text-align: center;
+  z-index: 999;
+}
+
+.logo > img {
+  width: 300px;
 }
