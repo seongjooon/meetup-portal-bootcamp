@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './index.css';
 
 class Map extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Map extends Component {
   _initMap = () => {
     const container = this.mapBox.current;
     const options = {
-      center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+      center: new window.kakao.maps.LatLng(37.506024, 127.059162),
       level: 3
     };
 

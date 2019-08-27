@@ -4,7 +4,7 @@ import { getMeetupApi } from '../api/api';
 
 const mapStateToProps = state => {
   return {
-    cityData: state.cityDataReducer
+    event: state.eventDataReducer
   };
 };
 
