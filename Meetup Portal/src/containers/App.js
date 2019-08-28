@@ -16,9 +16,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onLoad(lat, lng) {
       getMeetupApi(lat, lng).then(data => {
-        dispatch({ 
-          type: LOAD_EVENT, 
-          data 
+        dispatch({
+          type: LOAD_EVENT,
+          data
         });
       });
 
@@ -28,9 +28,9 @@ const mapDispatchToProps = dispatch => {
         const bookmarkEvents = JSON.parse(
           localStorage.getItem(BOOKMARK_EVENTS)
         );
-        dispatch({ 
-          type: BOOKMARK_EVENTS_LOAD, 
-          events: bookmarkEvents 
+        dispatch({
+          type: BOOKMARK_EVENTS_LOAD,
+          events: bookmarkEvents
         });
       }
     },
@@ -46,9 +46,9 @@ const mapDispatchToProps = dispatch => {
         bookmarkEvents = filteredBookmarkEvents;
       }
 
-      dispatch({ 
-        type: BOOKMARK_EVENTS_UPDATE, 
-        events: bookmarkEvents 
+      dispatch({
+        type: BOOKMARK_EVENTS_UPDATE,
+        events: bookmarkEvents
       });
 
       localStorage.setItem(BOOKMARK_EVENTS, JSON.stringify(bookmarkEvents));

@@ -17,15 +17,10 @@ class MapContainer extends Component {
     hostImg: null
   };
 
-  _onMarkerClick = async (props, marker) => {
-    const hostData = await getHostDataApi(props.eventUrlName, props.eventId);
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true,
-      hostName: hostData['0'].name,
-      hostImg: hostData['0'].photo.thumb_link
-    });
+  _handleDrag = (_, map) => {
+    const newLat = map.center.lat();
+    const newLng = map.center.lng();
+    this.props.onLoad(newLat, newLng);
   };
 
   _onMapClicked = () => {
@@ -37,10 +32,15 @@ class MapContainer extends Component {
     }
   };
 
-  _handleDrag = (_, map) => {
-    const newLat = map.center.lat();
-    const newLng = map.center.lng();
-    this.props.onLoad(newLat, newLng);
+  _onMarkerClick = async (props, marker) => {
+    const hostData = await getHostDataApi(props.eventUrlName, props.eventId);
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+      hostName: hostData['0'].name,
+      hostImg: hostData['0'].photo.thumb_link
+    });
   };
 
   _displayMarkers = () => {
