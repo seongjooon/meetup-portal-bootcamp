@@ -17,7 +17,7 @@ class MapContainer extends Component {
     hostImg: null
   };
 
-  onMarkerClick = async (props, marker) => {
+  _onMarkerClick = async (props, marker) => {
     const hostData = await getHostDataApi(props.eventUrlName, props.eventId);
     this.setState({
       selectedPlace: props,
@@ -43,7 +43,7 @@ class MapContainer extends Component {
     this.props.onLoad(newLat, newLng);
   };
 
-  displayMarkers = () => {
+  _displayMarkers = () => {
     const { eventList } = this.props;
     return eventList.map(event => {
       if (event.venue) {
@@ -51,7 +51,7 @@ class MapContainer extends Component {
           <Marker
             key={event.id}
             eventId={event.id}
-            onClick={this.onMarkerClick}
+            onClick={this._onMarkerClick}
             position={{
               lat: event.venue.lat,
               lng: event.venue.lon
@@ -87,7 +87,7 @@ class MapContainer extends Component {
         style={mapStyles}
         initialCenter={{ lat: 40.712586, lng: -74.006839 }}
       >
-        {this.displayMarkers()}
+        {this._displayMarkers()}
         <InfoWindow marker={activeMarker} visible={showingInfoWindow}>
           <div className='info-box'>
             <img className='info-event-host-img' alt={hostName} src={hostImg} />

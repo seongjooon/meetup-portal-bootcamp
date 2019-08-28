@@ -11,15 +11,19 @@ class App extends Component {
   }
 
   render() {
-    const { eventList, onLoad, updateBookmark } = this.props;
+    const { eventList, bookmarkList, onLoad, updateBookmark } = this.props;
     return (
       <div className='App'>
         <div className='logo'>
           <img alt={0} src={MEET_UP_LOGO} />
         </div>
         <MapContainer eventList={eventList} onLoad={onLoad} />
-        <Detail eventList={eventList} updateBookmark={updateBookmark} />
-        <Bookmark />
+        <Detail
+          eventList={eventList}
+          bookmarkList={bookmarkList}
+          updateBookmark={updateBookmark}
+        />
+        <Bookmark bookmarkList={bookmarkList} updateBookmark={updateBookmark} />
       </div>
     );
   }
