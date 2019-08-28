@@ -35,5 +35,8 @@
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.8"
+  },
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }

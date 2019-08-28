@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { getHostDataApi } from '../../api/api';
-import './index.css';
+import './MapContainer.css';
 
 const mapStyles = {
   width: '100%',
@@ -92,14 +92,14 @@ class MapContainer extends Component {
           <div className='info-box'>
             <img className='info-event-host-img' alt={hostName} src={hostImg} />
             <div className='info-event-name'>{selectedPlace.eventName}</div>
-            <div className='info-event-date'>
-              {`${selectedPlace.eventDate} / ${selectedPlace.eventTime}`}
-            </div>
             <div className='info-event-group-name'>
               {selectedPlace.eventGroupName}
             </div>
-            <div className='info-event-rsvp'>{selectedPlace.eventRsvp}</div>
             <div className='info-event-host-name'>{hostName}</div>
+            <div className='info-event-rsvp'>{selectedPlace.eventRsvp}명</div>
+            <div className='info-event-date'>
+              {`${selectedPlace.eventDate} / ${selectedPlace.eventTime}`}
+            </div>
           </div>
         </InfoWindow>
       </Map>

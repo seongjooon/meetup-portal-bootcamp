@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import MapContainer from './Map';
-import EventList from './EventList';
-import Bookmark from './Bookmark';
+import MapContainer from './Map/MapContainer';
+import EventList from './EventList/EventList';
+import Bookmark from './Bookmark/Bookmark';
 import { MEET_UP_LOGO } from '../constant/constants';
 import './App.css';
 
@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div className='App'>
         <div className='logo'>
-          <img alt={0} src={MEET_UP_LOGO} />
+          <img alt='123' src={MEET_UP_LOGO} />
         </div>
         <MapContainer eventList={eventList} onLoad={onLoad} />
         <EventList

@@ -22,15 +22,17 @@ export const eventListReducer = (state = initialState.eventList, action) => {
 export const bookmarkReducer = (state = initialState.bookmarkList, action) => {
   switch (action.type) {
     case BOOKMARK_EVENTS_LOAD:
-      return [...action.events];
+      return action.events;
     case BOOKMARK_EVENTS_UPDATE:
-      return [...action.events];
+      return action.events;
     default:
       return state;
   }
 };
 
-export default combineReducers({
+const rootReducer = combineReducers({
   eventList: eventListReducer,
   bookmarkList: bookmarkReducer
 });
+
+export default rootReducer;

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
-import './index.css';
+import { MdCheckBox } from 'react-icons/md';
+import './Bookmark.css';
 
 class Bookmark extends Component {
   _handleBookmarkClick = event => {

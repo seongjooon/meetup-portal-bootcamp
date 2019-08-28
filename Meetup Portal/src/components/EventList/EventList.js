@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
-import './index.css';
+import './EventList.css';
 
-class Detail extends Component {
+class EventList extends Component {
   _handleBookmarkClick = event => {
     this.props.updateBookmark(event);
   };
@@ -49,4 +49,4 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+export default EventList;
