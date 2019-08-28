@@ -23,6 +23,12 @@
   overflow: scroll;
 }
 
+.bookmark-box:after {
+  content: "";
+  display: block;
+  height: 60px;
+}
+
 .bookmark-element {
   width: 400px;
   height: 80px;

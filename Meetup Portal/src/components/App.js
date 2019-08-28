@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import MapContainer from './Map';
-import Detail from './Detail';
+import EventList from './EventList';
 import Bookmark from './Bookmark';
 import { MEET_UP_LOGO } from '../constant/constants';
+import './App.css';
 
 class App extends Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ class App extends Component {
           <img alt={0} src={MEET_UP_LOGO} />
         </div>
         <MapContainer eventList={eventList} onLoad={onLoad} />
-        <Detail
+        <EventList
           eventList={eventList}
           bookmarkList={bookmarkList}
           updateBookmark={updateBookmark}

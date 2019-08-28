@@ -5,12 +5,12 @@ import {
   BOOKMARK_EVENTS_UPDATE
 } from '../constant/constants';
 
-const initialState = {
+export const initialState = {
   eventList: [],
   bookmarkList: []
 };
 
-const eventListReducer = (state = initialState.eventList, action) => {
+export const eventListReducer = (state = initialState.eventList, action) => {
   switch (action.type) {
     case LOAD_EVENT:
       return action.data;
@@ -19,7 +19,7 @@ const eventListReducer = (state = initialState.eventList, action) => {
   }
 };
 
-const bookmarkReducer = (state = initialState.bookmarkList, action) => {
+export const bookmarkReducer = (state = initialState.bookmarkList, action) => {
   switch (action.type) {
     case BOOKMARK_EVENTS_LOAD:
       return [...action.events];
